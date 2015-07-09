@@ -36,6 +36,27 @@
 		Consultation.hbm.xml
 	</mappingFiles>
 
+    <globalProperty>
+        <property>muzimaconsultation.smsGatewayUrl</property>
+        <defaultValue>http://41.89.173.40/</defaultValue>
+        <description>
+            The SMS Gateway URL used to access its rest end points.
+        </description>
+    </globalProperty>
+    <globalProperty>
+        <property>muzimaconsultation.smsApp</property>
+        <defaultValue>amrs</defaultValue>
+        <description>
+            The name of the app/account registered at with the SMS gateway. This is the account enabling the system
+            to route sms via the gateway.
+        </description>
+    </globalProperty>
+    <globalProperty>
+        <property>muzimaconsultation.smsAppPassword</property>
+        <description>
+            The app password to be used to connect to sms gateway.
+        </description>
+    </globalProperty>
 	<!-- Internationalization -->
 	<!-- All message codes should start with ${project.parent.artifactId}. -->
 	<messages>
