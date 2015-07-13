@@ -32,6 +32,8 @@ import org.openmrs.module.muzima.model.NotificationData;
 import org.openmrs.module.muzima.model.QueueData;
 import org.openmrs.module.muzima.model.handler.QueueDataHandler;
 import org.openmrs.module.muzimaconsultation.utils.JsonUtils;
+import org.openmrs.module.muzimaconsultation.utils.SmsObject;
+import org.openmrs.module.muzimaconsultation.utils.SmsUtil;
 import org.openmrs.module.muzimaforms.MuzimaForm;
 import org.openmrs.module.muzimaforms.api.MuzimaFormService;
 import org.openmrs.obs.ComplexData;
@@ -91,6 +93,20 @@ public class ConsultationQueueDataHandler implements QueueDataHandler {
                 }
             }
             generateNotification(sourceUuid, encounter, recipient, role);
+
+            //TODO: Check for specific names who would be enrolled in the scheme. (Use a db table to store these)
+            //Create an sms object
+            //Check if recipient has phone number
+            if(org.springframework.util.StringUtils.hasLength(
+                    recipient.getAttribute(SmsUtil.PERSON_PHONE_ATTR_TYPE_ID).getValue())){
+                SmsObject sms = SmsUtil.createSmsObject(sourceUuid,encounter,recipient,role);
+
+                //try sending
+                String sender = encounter.getProvider().getPersonName().getFullName();
+                String senderId = encounter.getProvider().getUuid();
+                SmsUtil.sendSms(sms,sender,senderId);
+            }
+
         } catch (Exception e) {
             String reason = "Unable to generate notification information. Rolling back encounter.";
             Context.getEncounterService().voidEncounter(encounter, reason);

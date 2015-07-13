@@ -1,0 +1,12 @@
+org/openmrs/module/muzimaconsultation/api/db/ConsultationDAO.class
+org/openmrs/module/muzimaconsultation/utils/SmsObject.class
+org/openmrs/module/muzimaconsultation/handler/ConsultationQueueDataHandler.class
+org/openmrs/module/muzimaconsultation/api/ConsultationService.class
+org/openmrs/module/muzimaconsultation/utils/JsonUtils.class
+org/openmrs/module/muzimaconsultation/utils/ISO8601Util.class
+org/openmrs/module/muzimaconsultation/utils/SmsAPIException.class
+org/openmrs/module/muzimaconsultation/utils/SmsUtil.class
+org/openmrs/module/muzimaconsultation/ConsultationActivator.class
+org/openmrs/module/muzimaconsultation/api/impl/ConsultationServiceImpl.class
+org/openmrs/module/muzimaconsultation/ConsultationData.class
+org/openmrs/module/muzimaconsultation/api/db/hibernate/HibernateConsultationDAO.class

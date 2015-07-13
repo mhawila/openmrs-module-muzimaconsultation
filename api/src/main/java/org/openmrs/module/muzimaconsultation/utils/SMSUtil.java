@@ -63,7 +63,17 @@ public class SmsUtil {
         UsernamePasswordCredentials gateWayCredentials = getCredentials();
 
         CredentialsProvider credProvider = new BasicCredentialsProvider();
-        credProvider.setCredentials(new AuthScope(smsGatewayUrl,AuthScope.ANY_PORT,AuthScope.ANY_REALM,"basic"),
+
+        String host;
+        if(smsGatewayUrl.startsWith("http")){
+            int start = smsGatewayUrl.indexOf("//") + 2;
+            int end = smsGatewayUrl.indexOf(":", start) ;
+            host = smsGatewayUrl.substring(start, end);
+        } else {
+            host = smsGatewayUrl;
+        }
+
+        credProvider.setCredentials(new AuthScope(host,AuthScope.ANY_PORT,AuthScope.ANY_REALM,"basic"),
                 gateWayCredentials);
 
         HttpPost postRequest = new HttpPost(sendUrl);
@@ -159,7 +169,7 @@ public class SmsUtil {
         String appName = Context.getAdministrationService().getGlobalProperty(GP_APP_NAME);
         String appPassword = Context.getAdministrationService().getGlobalProperty(GP_APP_PASSWORD);
 
-        if(!StringUtils.hasLength(appName) || StringUtils.hasLength(appPassword)){
+        if(!StringUtils.hasLength(appName) || !StringUtils.hasLength(appPassword)){
             throw new SmsAPIException("Both global properties "+GP_APP_NAME+" and "+GP_APP_PASSWORD+
             " must be specified for sms feature to work");
         }

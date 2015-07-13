@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<module configVersion="1.2">
+
+	<!-- Module Properties -->
+	<id>muzimaconsultation</id>
+	<name>Muzima Consultation Module</name>
+	<version>1.0.1-SNAPSHOT</version>
+	<package>org.openmrs.module.muzimaconsultation</package>
+	<author>nribeka</author>
+	<description>
+		Module to process consultation form data.
+	</description>
+	<updateURL>https://modules.openmrs.org/modules/download/muzimaconsultation/update.rdf</updateURL>
+	<require_version>1.8.2</require_version>
+	<!-- / Module Properties -->
+
+	<!-- Required Modules -->
+	<require_modules>
+        <require_module version="1.0.0">org.openmrs.module.muzima</require_module>
+        <require_module version="1.0.0">org.openmrs.module.muzimaforms</require_module>
+	</require_modules>
+	<!-- / Required Modules -->
+	
+	<!-- Module Activator -->
+	<activator>org.openmrs.module.muzimaconsultation.ConsultationActivator</activator>
+
+	<!-- Adds link to admin page -->
+	<extension>
+		<point>org.openmrs.admin.list</point>
+		<class>org.openmrs.module.muzimaconsultation.extension.html.AdminList</class>
+	</extension>
+	
+	<!-- Maps hibernate file's, if present -->
+	<mappingFiles>
+		Consultation.hbm.xml
+	</mappingFiles>
+
+    <globalProperty>
+        <property>muzimaconsultation.smsGatewayUrl</property>
+        <defaultValue>http://41.89.173.40/</defaultValue>
+        <description>
+            The SMS Gateway URL used to access its rest end points.
+        </description>
+    </globalProperty>
+    <globalProperty>
+        <property>muzimaconsultation.smsApp</property>
+        <defaultValue>amrs</defaultValue>
+        <description>
+            The name of the app/account registered at with the SMS gateway. This is the account enabling the system
+            to route sms via the gateway.
+        </description>
+    </globalProperty>
+    <globalProperty>
+        <property>muzimaconsultation.smsAppPassword</property>
+        <description>
+            The app password to be used to connect to sms gateway.
+        </description>
+    </globalProperty>
+	<!-- Internationalization -->
+	<!-- All message codes should start with muzimaconsultation. -->
+	<messages>
+		<lang>en</lang>
+		<file>messages.properties</file>
+	</messages>
+	<messages>
+		<lang>fr</lang>
+		<file>messages_fr.properties</file>
+	</messages>
+	<messages>
+		<lang>es</lang>
+		<file>messages_es.properties</file>
+	</messages>
+	<!-- /Internationalization -->
+
+</module>
+
